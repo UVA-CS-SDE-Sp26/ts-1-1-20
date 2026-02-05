@@ -1,0 +1,34 @@
+-----ProgramControl Design Document-----
+
+* Purpose:
+    Serves as the coordinator between the Command Line Interface, FileHandler, and Cipher Test
+
+    It recieves user input from TopSecret, requests data from FileHandler, and Decipers content via CipherService
+    Returns formmatted output
+
+    It does not directly access files or cipher keys
+* methpds
+    - getNumberedFileList()
+        > outputs a list of formmated strings:
+            01 filea.txt
+            02 fileb.txt
+        > Requests filenames from FileHandler and sorts it alphabetically and adds numeric ordering
+    - getFileByNumber(String fileNumber, String keyPathOrNull)
+        > inputs: fileNumber,keyPathOrNull(if there is a specific cipher key or default key)
+
+        > output:
+            Final readable file contents
+        > Converts fileNumber to index, requrests filenames, selects file, requests file contents, requests cipher key,
+            deciphers text, returns readable results
+        > Errors:
+            IlllegalArgumentException if fileNumber is invalid
+            IOException if file/key is missing
+
+* Planned Tests
+    - getNumberedFileList returns correctly numbered files
+    - files are sorted alphabetically
+    -getFileByNumber returns correct file
+    - Correct exceptions are thrown
+    - the correct key is used if there is a custom
+
+

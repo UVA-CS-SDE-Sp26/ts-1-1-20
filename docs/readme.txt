@@ -48,7 +48,7 @@ This project is a command-line utility:
         * required methods:
             List<String> getNumberedFileList();
 
-            String getFileContentsByNumber(String fileNumber, String keyPathOrNull)
+            String getFileByNumber(String fileNumber, String keyPathOrNull)
                 throws IllegalArgumentException, IOException;
         * responsbilies
             call FileHandler
@@ -159,7 +159,7 @@ Minimum ProgramControl tests:
 
 ### Team Member C – ProgramControl (Ansa)
 - [ ] ProgramControl.java created
-- [ ] getNumberedFileList() implemented
+- [ ] getFileByNumber() implemented
 - [ ] getFileContentsByNumber() implemented
 - [ ] Default key logic added
 - [ ] Error handling added
