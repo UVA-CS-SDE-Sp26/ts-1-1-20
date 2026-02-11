@@ -1,0 +1,10 @@
+-----Cipher Design Document-----
+
+*responsbilites
+            load key file
+            validate key
+            convert cipher text to readable text
+
+methods
+            CipherKey loadKey(String keyPath) throws IOException, IllegalArgumentException;
+            String decipher(String cipherText, CipherKey key);
