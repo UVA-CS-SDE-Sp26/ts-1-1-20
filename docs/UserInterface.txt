@@ -1,0 +1,49 @@
+----- TopSecret (CLI) Design Document -----
+serves as the Command Line Interface (CLI) for the application
+
+Responsible for:
+- Receiving command-line arguments
+- Calling ProgramControl with the correct parameters
+- Printing results to the console
+- Handling errors
+
+TopSecret does not:
+- Access files directly
+- Perform sorting
+- Load cipher keys
+- Decipher text
+
+METHODS:
+public static void main(String[] args)
+- Entry point when running: java topsecret
+- Creates: FileHandler, CipherService, ProgramControl, TopSecret
+- Calls run(args)
+
+public void run(String[] args): handles command-line behavior
+
+Behavior Based on Arguments
+1. No arguments: java topsecret
+Calls:
+controller.getNumberedFileList()
+Prints each file on a new line
+
+2. One argument
+
+Command: java topsecret 01
+Calls:
+controller.getFileByNumber("01", null)
+Uses default key
+Prints deciphered content
+
+3. Two arguments
+
+Command: java topsecret 01 mykey.txt
+Calls:
+controller.getFileByNumber("01", "mykey.txt")
+Uses provided key
+Prints deciphered content
+
+4. 2+ arguments
+Prints:
+Error: Invalid arguments
+Does not call ProgramControl

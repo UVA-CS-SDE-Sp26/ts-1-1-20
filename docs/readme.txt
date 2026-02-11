@@ -144,10 +144,10 @@ Minimum ProgramControl tests:
 ## Team Progress Checklist (update as work is completed)
 
 ### Team Member A – TopSecret (CLI) (Ridhi)
-- [ ] TopSecret.java created
-- [ ] main method implemented
-- [ ] Argument parsing complete
-- [ ] Printing output implemented
+- [X] TopSecret.java created
+- [X] main method implemented
+- [X] Argument parsing complete
+- [X] Printing output implemented
 - [ ] Unit tests written (if applicable)
 
 ### Team Member B – FileHandler
