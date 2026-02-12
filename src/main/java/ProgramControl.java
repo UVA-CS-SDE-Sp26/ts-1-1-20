@@ -22,7 +22,7 @@ public class ProgramControl {
         // get filenames
         List<String> files = fileHandler.listDataFiles();
 
-        //  sort alphabetically (copy so we don't mutate FileHandler's list)
+        //  sort alphabetically (copy)
         List<String> sorted = new ArrayList<>(files);
         Collections.sort(sorted);
 
@@ -72,7 +72,7 @@ public class ProgramControl {
         // CipherKey key = cipherService.loadKey(keyPath);
         // return cipherService.decipher(cipherText, key);
 
-        // TEMP: if cipher not ready, return raw text so you can keep working
+        // temporary
         return cipherText;
     }
 

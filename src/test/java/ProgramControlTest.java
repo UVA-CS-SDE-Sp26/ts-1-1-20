@@ -118,9 +118,7 @@ public class ProgramControlTest {
         verifyNoMoreInteractions(cipherService);
     }
 
-    ==========================================================
-    END DISABLED BLOCK
-    ==========================================================
+   end commen
     */
 
     @Test
@@ -130,6 +128,7 @@ public class ProgramControlTest {
                 () -> programControl.getFileByNumber("1", null)
         );
 
+        // makes sure nothing touches these classes
         verifyNoInteractions(fileHandler);
         verifyNoInteractions(cipherService);
     }
@@ -144,6 +143,7 @@ public class ProgramControlTest {
                 () -> programControl.getFileByNumber("02", null)
         );
 
+        // makes sure nothing touches these classes/methods
         verify(fileHandler).listDataFiles();
         verifyNoInteractions(cipherService);
     }
