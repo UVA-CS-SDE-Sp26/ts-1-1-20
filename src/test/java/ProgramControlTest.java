@@ -44,8 +44,8 @@ public class ProgramControlTest {
 
     /*
     ==========================================================
-   Can't do cipher tests
-    ==========================================================
+   Can't do cipher tests because CipherClass is not updated
+
 
     @Test
     void getFileByNumberValidUseDefaultKey() throws Exception {
@@ -161,6 +161,7 @@ public class ProgramControlTest {
                 () -> programControl.getFileByNumber("01", null)
         );
 
+        // WILL NEED TO CHANGE IF TEAM MEMBER B DOESN'T FOLLOW THE CONTRACT
         verify(fileHandler).listDataFiles();
         verify(fileHandler).readFile("a.txt");
         verifyNoInteractions(cipherService);
