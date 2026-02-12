@@ -159,11 +159,11 @@ Minimum ProgramControl tests:
 
 ### Team Member C – ProgramControl (Ansa)
 - [X] ProgramControl.java created
-- [ ] getFileByNumber() implemented
-- [ ] getFileContentsByNumber() implemented
-- [ ] Default key logic added
-- [ ] Error handling added
-- [ ] Unit tests written
+- [ X] getFileByNumber() implemented
+- [X ] getFileContentsByNumber() implemented
+- [X ] Default key logic added
+- [ X] Error handling added
+- [ X] Unit tests written
 
 ### Team Member D – Cipher
 - [ ] CipherService.java created
@@ -173,3 +173,6 @@ Minimum ProgramControl tests:
 - [ ] Key validation implemented
 - [ ] Unit tests written
 
+## FINAL CHECK LIST
+-[ ] ensure all tests work
+-[ ] ensure topSecret runs
