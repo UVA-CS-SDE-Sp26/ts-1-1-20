@@ -35,7 +35,7 @@ public class TopSecret {
                 System.out.println(result);
             }
             else {
-                System.out.println("Invalid arguments");
+                throw new IllegalArgumentException("Invalid arguments");
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
