@@ -174,5 +174,5 @@ Minimum ProgramControl tests:
 - [ ] Unit tests written
 
 ## FINAL CHECK LIST
--[ ] ensure all tests work
--[ ] ensure topSecret runs
+-[ X] ensure all tests work
+-[ X] ensure topSecret runs
