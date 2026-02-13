@@ -1,0 +1,8 @@
+FileHandler Documentation
+
+Purpose
+-------
+The FileHandler class is responsible for all direct file system access in
+the TopSecret project. No other class reads files from disk. This keeps
+file access isolated and allows other modules to operate without knowing
+file locations or file formats.

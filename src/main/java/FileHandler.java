@@ -9,41 +9,34 @@ import java.util.stream.Stream;
 public class FileHandler {
     private final Path dataDirectory;
 
-
     public FileHandler() {
         this(Paths.get("data"));
     }
 
-
+    // Helpful for unit tests (pass a temp directory)
     public FileHandler(Path dataDirectory) {
         this.dataDirectory = dataDirectory;
     }
 
 
     public List<String> listDataFiles() {
-
         if (!Files.exists(dataDirectory) || !Files.isDirectory(dataDirectory)) {
-            throw new IllegalStateException(
-                    "Missing data folder: " + dataDirectory.toAbsolutePath());
+            throw new IllegalStateException("Missing data folder: " + dataDirectory.toAbsolutePath());
         }
 
         try (Stream<Path> stream = Files.list(dataDirectory)) {
-
             return stream
                     .filter(Files::isRegularFile)
-                    .map(path -> path.getFileName().toString())
+                    .map(p -> p.getFileName().toString())
                     .sorted(Comparator.naturalOrder())
                     .collect(Collectors.toList());
-
         } catch (IOException e) {
-            throw new IllegalStateException(
-                    "Unable to list data files: " + e.getMessage(), e);
+            throw new IllegalStateException("Unable to list data files: " + e.getMessage(), e);
         }
     }
 
 
-    public String readDataFile(String filename) {
-
+    public String readFile(String filename) throws IOException {
         if (filename == null || filename.trim().isEmpty()) {
             throw new IllegalArgumentException("Filename cannot be empty.");
         }
@@ -51,38 +44,30 @@ public class FileHandler {
         Path filePath = dataDirectory.resolve(filename);
 
         if (!Files.exists(filePath) || !Files.isRegularFile(filePath)) {
-            throw new IllegalStateException(
-                    "Data file not found: " + filePath.toAbsolutePath());
+            throw new IllegalArgumentException("Data file not found: " + filePath.toAbsolutePath());
         }
 
-        try {
-            return Files.readString(filePath, StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            throw new IllegalStateException(
-                    "Unable to read file: " + filename, e);
-        }
+        return Files.readString(filePath, StandardCharsets.UTF_8);
     }
 
 
-    public List<String> readKeyFile(String keyPath) {
+    public List<String> readKeyFile(String keyPath) throws IOException {
+        if (keyPath == null || keyPath.trim().isEmpty()) {
+            throw new IllegalArgumentException("Key path cannot be empty.");
+        }
 
         Path keyFile = Paths.get(keyPath);
 
         if (!Files.exists(keyFile) || !Files.isRegularFile(keyFile)) {
-            throw new IllegalStateException(
-                    "Cipher key file not found: " + keyFile.toAbsolutePath());
+            throw new IllegalArgumentException("Cipher key file not found: " + keyFile.toAbsolutePath());
         }
 
-        try {
-            return Files.readAllLines(keyFile, StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            throw new IllegalStateException(
-                    "Unable to read cipher key file: " + keyPath, e);
-        }
+        return Files.readAllLines(keyFile, StandardCharsets.UTF_8);
     }
 
 
     public boolean keyExists(String keyPath) {
+        if (keyPath == null || keyPath.trim().isEmpty()) return false;
         Path keyFile = Paths.get(keyPath);
         return Files.exists(keyFile) && Files.isRegularFile(keyFile);
     }
