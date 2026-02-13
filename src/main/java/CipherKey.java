@@ -12,25 +12,33 @@ public class CipherKey {
 
     // creates CipherKey objects
     public CipherKey(String fromAlphabet, String toAlphabet) {
-        // TODO
-        // store fields
-        // build decipherMap:
-        //   for i in 0..length-1:
-        //      plain = fromAlphabet.charAt(i)
-        //      cipher = toAlphabet.charAt(i)
-        //      decipherMap.put(cipher, plain)
-        this.fromAlphabet = null;
-        this.toAlphabet = null;
+        if (fromAlphabet == null || toAlphabet == null) {
+            throw new IllegalArgumentException("Key alphabets cannot be null");
+        }
+        if (fromAlphabet.isEmpty() || toAlphabet.isEmpty()) {
+            throw new IllegalArgumentException("Key alphabets cannot be empty");
+        }
+        if (fromAlphabet.length() != toAlphabet.length()) {
+            throw new IllegalArgumentException("Key alphabet lines must have the same length");
+        }
+
+        this.fromAlphabet = fromAlphabet;
+        this.toAlphabet = toAlphabet;
         this.decipherMap = new HashMap<>();
+
+        // build inverse mapping: cipherChar -> plainChar
+        for (int i = 0; i < fromAlphabet.length(); i++) {
+            char plain = fromAlphabet.charAt(i);
+            char cipher = toAlphabet.charAt(i);
+            decipherMap.put(cipher, plain);
+        }
     }
 
     // returns the plain character for a given cipher character,
     // or returns the original character if it is not in the map
     public char decipherChar(char cipherChar) {
-        // TODO
-        // if decipherMap contains cipherChar -> return mapped char
-        // else return cipherChar unchanged
-        return cipherChar;
+        Character mapped = decipherMap.get(cipherChar);
+        return (mapped != null) ? mapped : cipherChar;
     }
 
     // helper for CipherService.decipher()
