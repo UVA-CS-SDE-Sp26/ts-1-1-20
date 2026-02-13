@@ -166,8 +166,8 @@ Minimum ProgramControl tests:
 - [ ] Unit tests written
 
 ### Team Member D – Cipher
-- [ ] CipherService.java created
-- [ ] CipherKey.java created
+- [x] CipherService.java created
+- [x] CipherKey.java created
 - [ ] loadKey() implemented
 - [ ] decipher() implemented
 - [ ] Key validation implemented
