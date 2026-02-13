@@ -70,6 +70,6 @@ public class ProgramControl {
         CipherKey key = cipherService.loadKey(keyPath);
         return cipherService.decipher(cipherText, key);
 
-        }
+    }
 
 }
