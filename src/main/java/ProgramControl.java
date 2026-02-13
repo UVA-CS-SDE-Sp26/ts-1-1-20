@@ -60,8 +60,6 @@ public class ProgramControl {
 
         // pick filename and read raw cipher text
         String filename = sorted.get(index);
-        //TODO
-        // open to changing bc filehandler did not use the correct name
 
         String cipherText = fileHandler.readFile(filename);
 
@@ -69,11 +67,9 @@ public class ProgramControl {
         String keyPath = (keyPathOrNull == null) ? "ciphers/key.txt" : keyPathOrNull;
 
         // decipher using CipherService (UNCOMMENT once CipherService matches contract)
-        // CipherKey key = cipherService.loadKey(keyPath);
-        // return cipherService.decipher(cipherText, key);
+        CipherKey key = cipherService.loadKey(keyPath);
+        return cipherService.decipher(cipherText, key);
 
-        // temporary
-        return cipherText;
-    }
+        }
 
 }

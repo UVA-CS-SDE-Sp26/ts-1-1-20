@@ -42,9 +42,6 @@ public class ProgramControlTest {
         verifyNoInteractions(cipherService);
     }
 
-    /*
-    ==========================================================
-   Can't do cipher tests because CipherClass is not updated
 
 
     @Test
@@ -118,8 +115,7 @@ public class ProgramControlTest {
         verifyNoMoreInteractions(cipherService);
     }
 
-   end commen
-    */
+
 
     @Test
     void getFileByNumberInvalidFormatThrows() {
@@ -161,7 +157,7 @@ public class ProgramControlTest {
                 () -> programControl.getFileByNumber("01", null)
         );
 
-        // WILL NEED TO CHANGE IF TEAM MEMBER B DOESN'T FOLLOW THE CONTRACT
+
         verify(fileHandler).listDataFiles();
         verify(fileHandler).readFile("a.txt");
         verifyNoInteractions(cipherService);
