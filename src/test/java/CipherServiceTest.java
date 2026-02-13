@@ -13,24 +13,29 @@ public class CipherServiceTest {
     Path tempDir;
 
     @Test
-    void decipherChangesMappedCharacters_keepsOthers() {
+    void decipher_worksAndKeepsPunctuation() {
         CipherService service = new CipherService();
 
-        // plain abc -> cipher bca (encipher)
-        // decipher inverse: b->a, c->b, a->c
         CipherKey key = new CipherKey("abc", "bca");
 
         String cipherText = "b c!\n-a";
-        String expected  = "a b!\n-c";
+        String expected = "a b!\n-c";
 
         assertEquals(expected, service.decipher(cipherText, key));
     }
 
     @Test
-    void loadKey_validFile_returnsKeyThatDeciphers() throws Exception {
+    void decipher_nullText_throws() {
+        CipherService service = new CipherService();
+        CipherKey key = new CipherKey("abc", "bca");
+
+        assertThrows(IllegalArgumentException.class, () -> service.decipher(null, key));
+    }
+
+    @Test
+    void loadKey_validFile_loadsAndDeciphers() throws Exception {
         CipherService service = new CipherService();
 
-        // your real key format (2 lines)
         String line1 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         String line2 = "bcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890a";
 
@@ -39,7 +44,6 @@ public class CipherServiceTest {
 
         CipherKey key = service.loadKey(keyFile.toString());
 
-        // inverse check: 'b' should decode to 'a', and 'a' should decode to '0'
         assertEquals('a', key.decipherChar('b'));
         assertEquals('0', key.decipherChar('a'));
     }
@@ -48,7 +52,8 @@ public class CipherServiceTest {
     void loadKey_missingFile_throwsIOException() {
         CipherService service = new CipherService();
 
-        Path missing = tempDir.resolve("nope.txt");
+        Path missing = tempDir.resolve("missing.txt");
+
         assertThrows(IOException.class, () -> service.loadKey(missing.toString()));
     }
 }

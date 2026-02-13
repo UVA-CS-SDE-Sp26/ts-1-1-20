@@ -27,4 +27,21 @@ public class CipherKeyTest {
         assertEquals('!', key.decipherChar('!'));
         assertEquals('\n', key.decipherChar('\n'));
     }
+
+    @Test
+    void cipherKey_nullAlphabet_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> new CipherKey(null, "abc"));
+        assertThrows(IllegalArgumentException.class, () -> new CipherKey("abc", null));
+    }
+
+    @Test
+    void cipherKey_mismatchedLengths_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> new CipherKey("abcd", "abc"));
+    }
+
+    @Test
+    void cipherKey_emptyAlphabet_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> new CipherKey("", "abc"));
+        assertThrows(IllegalArgumentException.class, () -> new CipherKey("abc", ""));
+    }
 }

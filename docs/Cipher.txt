@@ -1,10 +1,64 @@
 -----Cipher Design Document-----
 
-*responsbilites
-            load key file
-            validate key
-            convert cipher text to readable text
+* Purpose:
+    Handles all cipher-related logic for the TopSecret program.
 
-methods
-            CipherKey loadKey(String keyPath) throws IOException, IllegalArgumentException;
-            String decipher(String cipherText, CipherKey key);
+    CipherService loads and validates cipher key files, then uses the key to convert encrypted mission text into readable plain text.
+
+    It does not list mission files or print to the console.
+
+* Methods
+    - loadKey(String keyPath)
+        > input: keyPath (example: "ciphers/key.txt" or "mykey.txt")
+
+        > output: CipherKey object
+
+        > Reads the key file and extracts the first two non-empty lines:
+            Line 1 = fromAlphabet (plain characters)
+            Line 2 = toAlphabet (cipher characters)
+
+        > Validation:
+            - keyPath is not null/blank
+            - file has at least 2 non-empty lines
+            - both lines are the same length
+            - no duplicate characters in either line
+            - line2 is a permutation of line1 (same character set)
+
+        > Errors:
+            IOException if file is missing/unreadable
+            IllegalArgumentException if key format is invalid
+
+    - decipher(String cipherText, CipherKey key)
+        > input: cipherText (raw file contents), key (CipherKey)
+
+        > output: readable plain text String
+
+        > Uses the CipherKey mapping to replace each encrypted character with its decoded character.
+
+        > Characters not in the cipher alphabet (spaces, punctuation, newlines) remain unchanged.
+
+        > Errors:
+            IllegalArgumentException if cipherText is null
+            IllegalArgumentException if key is null
+
+* CipherKey Class
+    - Stores:
+        fromAlphabet (line 1)
+        toAlphabet (line 2)
+
+    - Builds:
+        HashMap<Character, Character> decipherMap
+        (maps cipherChar -> plainChar)
+
+    - Provides:
+        decipherChar(char c) to decode one character or return it unchanged
+
+* Planned Tests
+    - CipherKey builds correct inverse mapping (small example key)
+    - CipherKey leaves unknown characters unchanged
+    - decipher correctly decodes a string and preserves punctuation/newlines
+    - decipher throws exception for null inputs
+    - loadKey loads a valid 2-line key file
+    - loadKey throws IOException if key file is missing
+    - loadKey throws IllegalArgumentException for invalid key format
+      (missing lines, wrong length, duplicates, not a permutation)
