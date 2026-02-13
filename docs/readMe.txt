@@ -1,5 +1,31 @@
 # TopSecret
 
+
+## How to Run the Program
+Note: This project is executed using Gradle as required by the assignment.
+The equivalent command `java topsecret` shown in the narrative represents
+the program conceptually, but execution is performed using:
+
+.\gradlew run
+
+
+All commands must be executed from the project root directory.
+
+## Alternative Execution (Direct Java Command)
+
+Although the project is designed to run using Gradle, the program can also be executed directly using the Java command line.
+
+First compile the project using Gradle:
+    .\gradlew classes
+
+Then run the main class directly:
+    java -cp build\classes\java\main TopSecret
+Run with arguments:
+    java -cp build\classes\java\main TopSecret 01
+
+This mirrors the assignment narrative example (`java topsecret`) while still using the Gradle build output.
+
+---
 ## Overview
 
 TopSecret is a command-line Java application that allows agents to view mission files stored in the `/data` directory.
@@ -24,10 +50,6 @@ The program is built and executed using Gradle.
 /src/main/java → Java source code
 
 ---
-
-## How to Run the Program
-
-All commands must be executed from the project root directory.
 
 
 ## Testing Approach
